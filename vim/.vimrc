@@ -10,8 +10,13 @@ set nocompatible
 "Allow backspacing to work normally
 set backspace=indent,eol,start
 
-"Tunrn on fancy colour
+"Turn on fancy colour
 syntax enable
+
+"Check if file is Jenkinsfile. If so, turn on syntaxa
+if @% =~# 'Jenkinsfile'
+    set syntax=groovy
+endif
 
 "Allow vim to open different files
 filetype plugin on
@@ -30,14 +35,22 @@ let g:netrw_liststyle=3     " tree view
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 
+""""" Tab stuff
+
 "Allow 4 spaces instead of tabs
 filetype plugin indent on
 " show existing tab with 4 spaces width
 set tabstop=4
-" " when indenting with '>', use 4 spaces width
+" when indenting with '>', use 4 spaces width
 set shiftwidth=4
-" " On pressing tab, insert 4 spaces
+" On pressing tab, insert 4 spaces
 set expandtab
+" Add fun lines on a tab, good for visulizing
+set listchars=tab:\|·,trail:·
+
+
+"Makes it so that p doesn't copy whatever was pasted over it
+xnoremap p "_dP
 
 """""" Plugins
 call plug#begin('~/.vim/plugged')
